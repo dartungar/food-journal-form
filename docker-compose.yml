@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "8080:80"
+    environment:
+      - API_URL=https://api.example.com
+      - IMAGE_1_PATH=https://files.dartungar.com/api/public/dl/bo4mXC-n/static/pusheen-burrito.gif
+      - IMAGE_2_PATH=https://files.dartungar.com/api/public/dl/J85PAiBQ/static/pusheen-stormy-eating.gif
