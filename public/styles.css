@@ -47,6 +47,11 @@ body {
   .scale-number.active {
     border-color: #757575; /* Changed from #000 to a milder color */
     transform: scale(1.1);
+    /* Add these new properties */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    font-weight: bold;
+    /* Darken the background color when selected */
+    filter: brightness(0.85);
   }
 
   #tags {
