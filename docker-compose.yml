@@ -4,8 +4,14 @@ services:
   web:
     build: .
     ports:
-      - "2787:80"
+      - "3367:3367"
+    env_file:
+      - .env
     environment:
-      - API_URL=https://api.example.com
-      - IMAGE_1_PATH=https://files.dartungar.com/api/public/dl/bo4mXC-n/static/pusheen-burrito.gif
-      - IMAGE_2_PATH=https://files.dartungar.com/api/public/dl/J85PAiBQ/static/pusheen-stormy-eating.gif
+      - IMAGE_1_PATH=${IMAGE_1_PATH:-images/pusheen-burrito.gif}
+      - IMAGE_2_PATH=${IMAGE_2_PATH:-images/pusheen-stormy-eating.gif}
+      - API_TOKEN=${API_TOKEN}
+      - API_ENDPOINT=${API_ENDPOINT}
+      - API_URL=${API_URL:-/api/journal}
+      - FRONTEND_ORIGIN=${FRONTEND_ORIGIN}
+      - PORT=${PORT:-3367}

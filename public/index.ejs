@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <script
+      data-config="<%= JSON.stringify({
+      apiUrl: process.env.API_URL || '/api/journal',
+      img1Path: process.env.IMG1_PATH || '',
+      img2Path: process.env.IMG2_PATH || ''
+  }) %>"
+      src="/js/app.js"
+      defer
+    ></script>
+    <title>Food Journal</title>
+  </head>
+  <body>
+    <form id="foodJournal">
+      <div class="form-group">
+        <label for="food">What did you eat?</label>
+        <input type="text" id="food" required />
+      </div>
+
+      <div class="form-group">
+        <label for="datetime">When did you eat?</label>
+        <input type="datetime-local" id="datetime" required />
+      </div>
+
+      <div class="form-group">
+        <label>Satiety Level Before</label>
+        <div class="satiety-scale" id="satietyBefore"></div>
+        <input type="hidden" id="beforeValue" required />
+      </div>
+
+      <div class="form-group">
+        <label>Satiety Level After</label>
+        <div class="satiety-scale" id="satietyAfter"></div>
+        <input type="hidden" id="afterValue" required />
+      </div>
+
+      <div class="form-group">
+        <label for="tags">Tags</label>
+        <select id="tags" multiple>
+          <option value="TV">TV</option>
+          <option value="PC">PC</option>
+          <option value="Book">Book</option>
+          <option value="Stress">Stress</option>
+          <option value="Sick">Sick</option>
+          <option value="Sad">Sad</option>
+          <option value="Bored">Bored</option>
+          <option value="Tired">Tired</option>
+        </select>
+      </div>
+
+      <button type="submit">Save Entry</button>
+    </form>
+    <div class="image-container">
+      <img id="image1" alt="Food image 1" />
+      <img id="image2" alt="Food image 2" />
+    </div>
+  </body>
+</html>

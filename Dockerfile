@@ -1,11 +1,28 @@
-FROM nginx:alpine
+# Build stage
+FROM node:20-slim as builder
 
-# Copy your files
-COPY index.html /usr/share/nginx/html/
-COPY entrypoint.sh /docker-entrypoint.d/40-replace-env-variables.sh
+# Create app directory
+WORKDIR /usr/src/app
 
-# Make the entrypoint script executable
-RUN chmod +x /docker-entrypoint.d/40-replace-env-variables.sh
+# Copy package files
+COPY package*.json ./
 
-# Make sure the nginx configuration allows access
-RUN chmod 644 /usr/share/nginx/html/index.html
+# Install dependencies
+RUN npm ci --only=production
+
+# Copy app source
+COPY . .
+
+# Production stage
+FROM gcr.io/distroless/nodejs22
+
+# Copy from builder
+WORKDIR /usr/src/app
+COPY --from=builder /usr/src/app ./
+
+# Expose the port your app runs on
+ENV PORT=3367
+EXPOSE 3367
+
+# Start the application
+CMD ["server.js"]
